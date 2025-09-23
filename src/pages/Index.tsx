@@ -1,110 +1,39 @@
-import { Fragment, useEffect, useState } from "react"
-import { groupPassengersByPurchase } from "../utils"
+import { useEffect, useState } from "react"
+import { fetchFlightData, fetchSeatsData, groupPassengers } from "../utils"
 import { useParams } from "react-router-dom"
-import axios from "axios"
-import type { AxiosResponse } from "axios"
-
-export type Passenger = {
-  name: string
-  age: number
-  boardingPassId: number
-  country: string
-  dni: string
-  passengerId: number
-  purchaseId: number
-  seatId: number
-  seatTypeId: number
-}
-
-type Flight = {
-  airplaneId: number
-  flightId: number
-  landingAirport: string
-  landingDateTime: number
-  passengers: Passenger[]
-  takeoffAirport: string
-  takeoffDateTime: number
-}
-
-type ApiResponse = {
-  code: number
-  data: Flight
-}
-
-async function fetchFlightData(flightId: string) {
-  const response: AxiosResponse<ApiResponse> = await axios.get(`http://localhost:3000/flights/${flightId}/passengers`)
-  const data = response.data.data;
-
-  return data;
-}
+import './Index.css'
+import type { Flight, Passenger, Seat } from "../types"
+import PassengersTable from "../components/PassengersTable"
+import FlightCard from "../components/FlightCard"
 
 function Index() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [flightData, setFlightData] = useState({} as Flight)
+  const [seatData, setSeatData] = useState([] as Seat[])
   const [groupedPassengers, setGroupedPassengers] = useState([] as Passenger[][])
 
   useEffect(() => {
     const fetchData = async () => {
       const flightId = id || '';
-      const resData: Flight = await fetchFlightData(flightId);
 
-      setFlightData(resData)
+      const resFlight = await fetchFlightData(flightId);
+      setFlightData(resFlight)
 
-      const passengers = resData.passengers;
-      const groupedPassengers = groupPassengersByPurchase(passengers)
+      const resSeats = await fetchSeatsData(flightId);
+      setSeatData(resSeats)
+
+      const groupedPassengers = groupPassengers(resFlight.passengers)
       setGroupedPassengers(groupedPassengers)
     }
+
     fetchData();
-  }, [])
+  }, [id])
 
   return (
     <>
-      <div className="flight-info">
-        <h2 className='flight-title'>Flight Info</h2>
-        <div className='flight-details'>
-          <div className="airport">
-            <h3>Takeoff Airport</h3>
-            <p>{flightData.takeoffAirport}</p>
-          </div>
-          <div className="arrow">✈️</div>
-          <div className="airport">
-            <h3>Landing Airport</h3>
-            <p>{flightData.landingAirport}</p>
-          </div>
-        </div>
-      </div>
-
-      {groupedPassengers.map((passengers: Passenger[], indexGroup) => (
-        <Fragment key={`group_${indexGroup}`}>
-          <h2 key={`h2_${indexGroup}`}>Purchase: {passengers[0].purchaseId}</h2>
-          <table key={`table_${indexGroup}`} className='passenger-table'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>DNI</th>
-                <th>Country</th>
-                <th>Seat ID </th>
-                <th>Seat Type ID </th>
-              </tr>
-            </thead>
-            <tbody>
-              {passengers.map((passenger: Passenger, indexPassenger) => (
-                <tr key={`row_${indexPassenger}`}>
-                  <td>{passenger.name}</td>
-                  <td>{passenger.age}</td>
-                  <td>{passenger.dni}</td>
-                  <td>{passenger.country}</td>
-                  <td>{passenger.seatId}</td>
-                  <td>{passenger.seatTypeId}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Fragment>
-      ))}
+      <FlightCard flightData={flightData} />
+      <PassengersTable passengersGrouped={groupedPassengers} seats={seatData} />
     </>
-
   )
 }
 

@@ -1,6 +1,24 @@
-import type { Passenger } from "./pages/Index";
+import type { ApiResponse, Flight, Passenger, Seat } from "./types";
+import axios from "axios";
+import type { AxiosResponse } from "axios";
 
-export function groupPassengersByPurchase(passengers: Passenger[]): Passenger[][] {
+const API_BASE_URL = "http://localhost:3000";
+
+async function fetchData<T>(endpoint: string): Promise<T> {
+  const response: AxiosResponse<ApiResponse<T>> = await axios.get(`${API_BASE_URL}${endpoint}`);
+  return response.data.data;
+}
+
+export async function fetchFlightData(flightId: string) {
+  return fetchData<Flight>(`/flights/${flightId}/passengers`);
+}
+
+export async function fetchSeatsData(flightId: string) {
+  return fetchData<Seat[]>(`/flights/${flightId}/seats`);
+}
+
+
+export function groupPassengers(passengers: Passenger[]): Passenger[][] {
   const groupedObj = passengers.reduce((groups, passenger) => {
     const key = passenger.purchaseId;
     if (!groups[key]) groups[key] = [];
@@ -10,4 +28,10 @@ export function groupPassengersByPurchase(passengers: Passenger[]): Passenger[][
 
   const groupedList: Passenger[][] = Object.values(groupedObj);
   return groupedList
+}
+
+export function getSeatInfo(seats: Seat[], seat_id: number) {
+  const seatData = seats.find((s) => s.seat_id === seat_id)!
+
+  return seatData
 }

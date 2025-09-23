@@ -1,0 +1,24 @@
+.passenger-table {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 1rem;
+  font-family: sans-serif;
+  color: black;
+  background-color: whitesmoke;
+}
+
+.passenger-table th,
+.passenger-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.passenger-table th {
+  background-color: #e0e0e0;
+}
+
+.passenger-table tbody tr:hover {
+  background-color: #d6d6d6;
+  cursor: pointer;
+}
