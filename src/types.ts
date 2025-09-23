@@ -26,6 +26,12 @@ export type Seat = {
   seat_row: number
 }
 
+export type FetchedData = {
+  flightData: Flight,
+  seatsData: Seat[]
+  groupedPassengers: Passenger[][]
+}
+
 export type ApiResponse<T> = {
   code: number
   data: T
