@@ -35,3 +35,12 @@ export function getSeatInfo(seats: Seat[], seat_id: number) {
 
   return seatData
 }
+
+export function getSeatType(seatTypeId: number): string {
+  switch (seatTypeId) {
+    case 1: return 'First Class'
+    case 2: return 'Economic+ Class'
+    case 3: return 'Ecomonic Class'
+    default: return 'unknown'
+  }
+}

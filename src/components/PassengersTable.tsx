@@ -1,7 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 import type { Passenger, Seat } from "../types";
 import './PassengersTable.css'
-import { getSeatInfo } from "../utils";
+import { getSeatInfo, getSeatType } from "../utils";
 
 interface PassengersTableProps {
   passengersGrouped: Passenger[][]
@@ -21,6 +21,7 @@ function PassengersTable({ passengersGrouped, seats }: PassengersTableProps) {
                 <th>Age</th>
                 <th>DNI</th>
                 <th>Country</th>
+                <th>Seat Type </th>
                 <th>Seat Column </th>
                 <th>Seat Row </th>
               </tr>
@@ -34,6 +35,7 @@ function PassengersTable({ passengersGrouped, seats }: PassengersTableProps) {
                     <td>{passenger.age}</td>
                     <td>{passenger.dni}</td>
                     <td>{passenger.country}</td>
+                    <td>{getSeatType(passenger.seatTypeId)}</td>
                     <td>{seatInfo.seat_column}</td>
                     <td>{seatInfo.seat_row}</td>
                   </tr>
