@@ -5,10 +5,12 @@ import './Index.css'
 import type { FetchedData } from "../types"
 import PassengersTable from "../components/PassengersTable"
 import FlightCard from "../components/FlightCard"
+import ErrorMessage from "../components/ErrorMessage"
 
 function Index() {
   const { id } = useParams<{ id: string }>();
   const [fetchedData, setFetchedData] = useState<FetchedData | null>(null)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +26,18 @@ function Index() {
         groupedPassengers: groupedPassengers
       })
     }
-    fetchData();
+    fetchData()
+      .catch(() =>
+        setError(true));
   }, [id])
 
-  if (!fetchedData) return (<h2>Loading...</h2>)
+  if (error) return (
+    <ErrorMessage
+      title="Error fetching data"
+      message="Check DB connection"
+    />
+  )
+  else if (!fetchedData) return (<h2>Loading...</h2>)
 
   return (
     <>
