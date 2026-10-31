@@ -1,0 +1,294 @@
+.flight-seat-map {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 2rem;
+  width: 100%;
+  min-width: 0;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.seat-map-container {
+  width: 100%;
+  min-width: 0;
+}
+
+.seat-map-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.seat-map {
+  width: 90%;
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 45% 45% 1rem 1rem / 8% 8% 1rem 1rem;
+  background: #f9fafb;
+  overflow-x: auto;
+}
+
+.seat-map-header,
+.seat-map-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.seat-map-column {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.4rem;
+}
+
+.row-label {
+  width: 24px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.seat-cell {
+  width: 42px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.seat-aisle {
+  width: 24px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.seat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px 8px 5px 5px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.seat:hover {
+  transform: scale(1.1);
+}
+
+.seat-available {
+  background: #e5e7eb;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.seat-occupied {
+  background: var(--purchase-color);
+  color: white;
+}
+
+.seat-same-purchase {
+  outline: 2px solid var(--purchase-color);
+  outline-offset: 2px;
+}
+
+.seat-selected {
+  outline: 3px solid #111827;
+  outline-offset: 3px;
+  transform: scale(1.08);
+}
+
+.seat-placeholder {
+  width: 38px;
+  height: 38px;
+}
+
+/* Passenger details */
+
+.seat-details {
+  width: 100%;
+  min-width: 0;
+  height: 420px;
+  padding: 1.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background: white;
+  color: #111827;
+  box-sizing: border-box;
+  position: sticky;
+  top: 1rem;
+  overflow-y: auto;
+}
+
+.seat-details-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #6b7280;
+}
+
+.seat-details-empty h3 {
+  color: #111827;
+}
+
+.seat-details-content {
+  width: 100%;
+}
+
+.seat-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.seat-details h3 {
+  margin-top: 0;
+}
+
+.seat-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.seat-status.available {
+  color: #6b7280;
+}
+
+.seat-status.occupied {
+  color: #16a34a;
+}
+
+.purchase-badge {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.selected-passenger {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.selected-passenger h4 {
+  margin-top: 0;
+}
+
+.purchase-members {
+  margin-top: 1.5rem;
+}
+
+.purchase-member {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.purchase-member:hover {
+  background: #f3f4f6;
+}
+
+.purchase-member-selected {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+@media (max-width: 850px) {
+  .flight-seat-map {
+    grid-template-columns: 1fr;
+  }
+
+  .seat-details {
+    position: static;
+    height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flight-seat-map {
+    padding: 0.75rem;
+  }
+
+  .seat-map {
+    align-items: flex-start;
+    overflow-x: auto;
+  }
+
+  .seat-map-header,
+  .seat-map-row {
+    gap: 0.25rem;
+  }
+
+  .seat-map-column {
+    gap: 0.25rem;
+  }
+
+  .seat-cell {
+    width: 34px;
+    height: 34px;
+  }
+
+  .column-label {
+    width: 32px;
+    height: 32px;
+  }
+
+  .seat-aisle {
+    width: 18px;
+  }
+
+  .seat,
+  .seat-placeholder {
+    width: 32px;
+    height: 32px;
+  }
+
+  .row-label {
+    height: 34px;
+  }
+}
