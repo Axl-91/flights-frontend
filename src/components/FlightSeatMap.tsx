@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react"
 import type { CSSProperties } from "react"
 import type { Passenger, Seat } from "../types"
+import { getPurchaseColor } from "../utils/purchaseColors"
+import SeatDetails from "./SeatDetails"
 import "./FlightSeatMap.css"
 
 interface FlightSeatMapProps {
@@ -14,56 +16,6 @@ interface SeatMapData {
   seatsByPosition: Map<string, Seat>
   passengersBySeat: Map<number, Passenger>
   passengersByPurchase: Map<number, Passenger[]>
-}
-
-const PURCHASE_COLORS = [
-  "#2563EB",
-  "#D97706",
-  "#0D9488",
-  "#9333EA",
-  "#DB2777",
-  "#65A30D",
-  "#0891B2",
-  "#DC2626",
-  "#4F46E5",
-  "#CA8A04",
-  "#059669",
-  "#C026D3",
-  "#EA580C",
-  "#0284C7",
-  "#7C3AED",
-  "#BE123C",
-  "#15803D",
-  "#A16207",
-  "#4338CA",
-  "#0F766E",
-  "#A21CAF",
-  "#B91C1C",
-  "#0369A1",
-  "#4D7C0F",
-  "#C2410C",
-  "#6D28D9",
-  "#BE185D",
-  "#047857",
-  "#B45309",
-  "#1D4ED8",
-  "#0E7490",
-  "#86198F",
-  "#7C2D12",
-  "#1E40AF",
-  "#166534",
-  "#9D174D",
-  "#854D0E",
-  "#155E75",
-  "#5B21B6",
-  "#9F1239",
-  "#365314",
-  "#374151",
-]
-
-function getPurchaseColor(purchaseId: number): string {
-  const index = Math.abs(purchaseId) % PURCHASE_COLORS.length
-  return PURCHASE_COLORS[index]
 }
 
 function hasAisleBefore(
@@ -235,97 +187,13 @@ function FlightSeatMap({
         </div>
       </div>
 
-      <div className="seat-details">
-        {!selectedSeat ? (
-          <div className="seat-details-empty">
-            <h3>No seat selected</h3>
-            <p>Select a seat on the map to see its information.</p>
-          </div>
-        ) : !selectedPassenger ? (
-          <div className="seat-details-content">
-            <div className="seat-details-header">
-              <div>
-                <h3>
-                  Seat {selectedSeat.seat_column}
-                  {selectedSeat.seat_row}
-                </h3>
-                <p className="seat-status available">
-                  Available
-                </p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="seat-details-content">
-            <div className="seat-details-header">
-              <div>
-                <h3>
-                  Seat {selectedSeat.seat_column}
-                  {selectedSeat.seat_row}
-                </h3>
-                <p className="seat-status occupied">
-                  Occupied
-                </p>
-              </div>
-
-              <span
-                className="purchase-badge"
-                style={{
-                  backgroundColor: getPurchaseColor(
-                    selectedPassenger.purchaseId
-                  ),
-                }}
-              >
-                Purchase #{selectedPassenger.purchaseId}
-              </span>
-            </div>
-
-            <div className="selected-passenger">
-              <h4>{selectedPassenger.name}</h4>
-              <p>Age: {selectedPassenger.age}</p>
-              <p>DNI: {selectedPassenger.dni}</p>
-              <p>Country: {selectedPassenger.country}</p>
-            </div>
-
-            {selectedGroup && selectedGroup.length > 1 && (
-              <div className="purchase-members">
-                <h4>
-                  Purchase members ({selectedGroup.length})
-                </h4>
-
-                {selectedGroup.map((passenger) => {
-                  const memberSeat = seats.find(
-                    (seat) => seat.seat_id === passenger.seatId
-                  )
-
-                  return (
-                    <button
-                      type="button"
-                      className={[
-                        "purchase-member",
-                        passenger.passengerId === selectedPassenger.passengerId
-                          ? "purchase-member-selected"
-                          : "",
-                      ].filter(Boolean).join(" ")}
-                      key={passenger.passengerId}
-                      onClick={() =>
-                        setSelectedSeatId(passenger.seatId)
-                      }
-                    >
-                      <span>{passenger.name}</span>
-                      <span>
-                        {memberSeat
-                          ? `${memberSeat.seat_column}${memberSeat.seat_row}`
-                          : "No seat"}
-                      </span>
-                    </button>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      <SeatDetails
+        selectedSeat={selectedSeat}
+        selectedPassenger={selectedPassenger}
+        selectedGroup={selectedGroup}
+        seats={seats}
+        onSeatSelect={setSelectedSeatId}
+      />
     </div>
   )
 }

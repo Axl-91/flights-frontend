@@ -1,0 +1,109 @@
+.seat-details {
+  width: 100%;
+  min-width: 0;
+  height: 420px;
+  padding: 1.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background: white;
+  color: #111827;
+  box-sizing: border-box;
+  position: sticky;
+  top: 1rem;
+  overflow-y: auto;
+}
+
+.seat-details-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #6b7280;
+}
+
+.seat-details-empty h3 {
+  color: #111827;
+}
+
+.seat-details-content {
+  width: 100%;
+}
+
+.seat-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.seat-details h3 {
+  margin-top: 0;
+}
+
+.seat-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.seat-status.available {
+  color: #6b7280;
+}
+
+.seat-status.occupied {
+  color: #16a34a;
+}
+
+.purchase-badge {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.selected-passenger {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.selected-passenger h4 {
+  margin-top: 0;
+}
+
+.purchase-members {
+  margin-top: 1.5rem;
+}
+
+.purchase-member {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.purchase-member:hover {
+  background: #f3f4f6;
+}
+
+.purchase-member-selected {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+@media (max-width: 850px) {
+  .seat-details {
+    position: static;
+    height: 420px;
+  }
+}
