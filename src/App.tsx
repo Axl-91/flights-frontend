@@ -1,13 +1,14 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Index from './pages/Index'
+import FlightsIndex from './pages/FlightsIndex'
+import FlightDetail from './pages/FlightDetail'
 import NotFound from './pages/NotFound'
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/flight/1" replace />} />
-      <Route path="/flight/:id" element={<Index />} />
+      <Route path="/" element={<FlightsIndex />} />
+      <Route path="/flight/:id" element={<FlightDetail />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

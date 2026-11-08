@@ -1,38 +1,50 @@
 .flight-seat-map {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
   align-items: start;
-  gap: 2rem;
-  width: 100%;
+  gap: 1.5rem;
+  width: min(1200px, calc(100% - 2rem));
   min-width: 0;
-  padding: 1.5rem;
+  margin: 0 auto 2.5rem;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .seat-map-container {
   width: 100%;
   min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
 }
 
 .seat-map-container h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.25rem;
+  font-size: 1.15rem;
+  color: var(--text);
 }
 
 .seat-map {
-  width: 90%;
-  max-width: 650px;
+  width: 100%;
+  max-width: 720px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 2rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 45% 45% 1rem 1rem / 8% 8% 1rem 1rem;
-  background: #f9fafb;
+  padding: 2.25rem 1rem 1.5rem;
+  border: 1px solid #dbeafe;
+  border-radius: 45% 45% 1.25rem 1.25rem / 9% 9% 1.25rem 1.25rem;
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
   overflow-x: auto;
+  box-sizing: border-box;
 }
+
 
 .seat-map-header,
 .seat-map-row {

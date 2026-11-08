@@ -1,30 +1,36 @@
 .seat-details {
   width: 100%;
   min-width: 0;
-  height: 420px;
+  min-height: 420px;
   padding: 1.25rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.75rem;
-  background: white;
-  color: #111827;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
   box-sizing: border-box;
   position: sticky;
   top: 1rem;
   overflow-y: auto;
+  box-shadow: var(--shadow-sm);
 }
 
 .seat-details-empty {
-  height: 100%;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #6b7280;
+  color: var(--muted);
 }
 
 .seat-details-empty h3 {
-  color: #111827;
+  margin: 0 0 0.35rem;
+  color: var(--text);
+}
+
+.seat-details-empty p {
+  margin: 0;
 }
 
 .seat-details-content {
@@ -40,16 +46,17 @@
 }
 
 .seat-details h3 {
-  margin-top: 0;
+  margin: 0 0 0.15rem;
 }
 
 .seat-status {
+  margin: 0;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .seat-status.available {
-  color: #6b7280;
+  color: var(--muted);
 }
 
 .seat-status.occupied {
@@ -60,32 +67,46 @@
   padding: 0.4rem 0.75rem;
   border-radius: 999px;
   color: white;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .selected-passenger {
   margin-top: 1rem;
   padding: 1rem;
-  background: #f9fafb;
-  border-radius: 0.5rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .selected-passenger h4 {
-  margin-top: 0;
+  margin: 0 0 0.5rem;
+}
+
+.selected-passenger p {
+  margin: 0.2rem 0;
+  color: var(--muted);
 }
 
 .purchase-members {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.purchase-members h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
 }
 
 .purchase-member {
   display: flex;
   justify-content: space-between;
+  gap: 0.75rem;
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 0.25rem;
   border: none;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
   background: transparent;
   color: inherit;
   text-align: left;
@@ -93,17 +114,17 @@
 }
 
 .purchase-member:hover {
-  background: #f3f4f6;
+  background: var(--surface-muted);
 }
 
 .purchase-member-selected {
-  background: #f3f4f6;
-  font-weight: 600;
+  background: #eff6ff;
+  font-weight: 700;
 }
 
 @media (max-width: 850px) {
   .seat-details {
     position: static;
-    height: 420px;
+    min-height: 0;
   }
 }

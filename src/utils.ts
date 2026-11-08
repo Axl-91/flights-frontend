@@ -26,6 +26,19 @@ export async function fetchSeatsData(flightId: string) {
   return fetchData<Seat[]>(`/flights/${flightId}/seats`);
 }
 
+export async function fetchAllFlights(ids: string[] = ["1", "2", "3", "4"]) {
+  const results = await Promise.allSettled(ids.map((id) => fetchFlightData(id)))
+  const flights = results.flatMap((result) =>
+    result.status === "fulfilled" ? [result.value] : []
+  )
+
+  if (flights.length === 0) {
+    throw new Error("No flight data available")
+  }
+
+  return flights.sort((a, b) => a.flightId - b.flightId)
+}
+
 export function groupPassengers(passengers: Passenger[]): Passenger[][] {
   const groupedObj = groupBy(passengers, p => p.passengerId)
 

@@ -3,59 +3,81 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: calc(100% - 2rem);
-  max-width: 900px;
-  margin: 1.5rem auto;
-  padding: 1rem 2rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: #f0f0f0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: min(1200px, calc(100% - 2rem));
+  margin: 1.25rem auto;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
 }
 
 .flight-title {
   margin: 0 0 1rem;
-  padding-bottom: 5px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #333;
+  padding-bottom: 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
   text-align: center;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 1px solid var(--border);
   width: 100%;
 }
 
 .flight-details {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  width: 100%;
 }
 
 .flight-info .airport {
   text-align: center;
+  min-width: 0;
+  flex: 1;
 }
 
 .flight-info h3 {
   margin: 0;
-  font-size: 1rem;
-  color: #333;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .flight-info p {
-  margin: 0.3rem 0 0;
-  font-weight: bold;
-  color: #555;
+  margin: 0.35rem 0 0;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  color: var(--text);
+  word-break: break-word;
 }
 
 .flight-info .arrow {
-  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #dbeafe;
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
   .flight-info {
-    padding: 1rem;
+    padding: 1.1rem;
   }
 
   .flight-details {
-    gap: 1rem;
+    gap: 0.75rem;
+  }
+
+  .flight-info .arrow {
+    width: 38px;
+    height: 38px;
   }
 }
