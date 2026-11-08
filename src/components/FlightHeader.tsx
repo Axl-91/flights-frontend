@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "./FlightHeader.css"
 
 interface FlightHeaderProps {
@@ -11,7 +12,11 @@ function FlightHeader({
 }: FlightHeaderProps) {
   return (
     <header className="flight-header">
-      <h1>Flight Dashboard</h1>
+      <h1>
+        <Link to="/" className="flight-header__home">
+          Flight Dashboard
+        </Link>
+      </h1>
 
       <div className="flight-selector">
         <label htmlFor="flight-select">Flight</label>

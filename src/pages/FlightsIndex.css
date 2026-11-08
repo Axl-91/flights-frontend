@@ -1,15 +1,16 @@
 .flights-index {
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at top, rgba(59, 130, 246, 0.12), transparent 55%),
-    linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    radial-gradient(ellipse at top, rgba(143, 197, 255, 0.18), transparent 48%),
+    linear-gradient(180deg, #f7fbff 0%, #edf4fb 100%);
 }
 
 .flights-index__hero {
-  padding: 3rem 1.5rem 2rem;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #1d4ed8 140%);
-  color: #f8fafc;
+  padding: 3rem 1.5rem 2.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 42%, #2563eb 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.14);
 }
 
 .flights-index__hero-content {
@@ -23,20 +24,27 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #93c5fd;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
 }
 
 .flights-index__hero h1 {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.1;
+  color: #ffffff;
+  text-shadow:
+    0 1px 0 rgba(15, 23, 42, 0.1),
+    0 2px 12px rgba(15, 23, 42, 0.22),
+    0 0 1px rgba(15, 23, 42, 0.18);
 }
 
 .flights-index__subtitle {
   margin: 0.75rem 0 0;
   max-width: 60ch;
-  color: #cbd5e1;
+  color: rgba(255, 255, 255, 0.96);
   font-size: 1.05rem;
+  text-shadow: 0 1px 6px rgba(15, 23, 42, 0.16);
 }
 
 .flights-index__main {
@@ -92,8 +100,8 @@
   align-items: center;
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: #dceefa;
+  color: var(--primary-strong);
   font-size: 0.82rem;
   font-weight: 700;
   white-space: nowrap;
@@ -148,14 +156,14 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: #3b82f6;
+  color: var(--primary);
 }
 
 .flight-index-card__line {
   width: clamp(16px, 3vw, 34px);
   height: 2px;
   border-radius: 999px;
-  background: #bfdbfe;
+  background: #bcd7f2;
 }
 
 .flight-index-card__plane {
@@ -177,7 +185,7 @@
 }
 
 .flight-index-card__cta {
-  color: #2563eb;
+  color: var(--primary-strong);
   font-weight: 700;
 }
 
