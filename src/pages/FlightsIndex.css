@@ -47,16 +47,17 @@
 }
 
 .flights-index__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .flight-index-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(170px, 220px) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.25rem 1.5rem;
+  padding: 1.25rem 1.4rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -67,7 +68,7 @@
 }
 
 .flight-index-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: #bfdbfe;
   color: inherit;
@@ -78,12 +79,12 @@
   outline-offset: 2px;
 }
 
-.flight-index-card__top,
-.flight-index-card__footer {
+.flight-index-card__top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  min-width: 0;
 }
 
 .flight-index-card__badge {
@@ -95,12 +96,12 @@
   color: #1d4ed8;
   font-size: 0.82rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .flight-index-card__meta,
 .flight-index-card__label,
-.flight-index-card__time,
-.flight-index-card__footer {
+.flight-index-card__time {
   color: var(--muted);
   font-size: 0.88rem;
 }
@@ -109,7 +110,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+  min-width: 0;
 }
 
 .flight-index-card__airport {
@@ -123,11 +125,19 @@
 }
 
 .flight-index-card__code {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
   font-weight: 800;
   color: var(--text);
-  line-height: 1.2;
-  word-break: break-word;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.flight-index-card__label {
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .flight-index-card__time {
@@ -137,12 +147,12 @@
 .flight-index-card__path {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   color: #3b82f6;
 }
 
 .flight-index-card__line {
-  width: 18px;
+  width: clamp(16px, 3vw, 34px);
   height: 2px;
   border-radius: 999px;
   background: #bfdbfe;
@@ -153,13 +163,45 @@
 }
 
 .flight-index-card__footer {
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 140px;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: right;
 }
 
 .flight-index-card__cta {
   color: #2563eb;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+@media (max-width: 920px) {
+  .flight-index-card {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .flight-index-card__top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .flight-index-card__footer {
+    align-items: flex-start;
+    min-width: 0;
+    padding-left: 0;
+    padding-top: 0.9rem;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    text-align: left;
+  }
 }
 
 @media (max-width: 640px) {
@@ -167,6 +209,10 @@
   .flights-index__main {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .flight-index-card {
+    padding: 1rem;
   }
 
   .flight-index-card__route {
@@ -182,3 +228,4 @@
     justify-content: flex-start;
   }
 }
+
